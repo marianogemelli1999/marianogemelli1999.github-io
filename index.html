@@ -7,7 +7,8 @@
     <style>
             body{font-family:Arial,sans-serif;margin:20px;background-color:#f5f5f5}
             .header{background-color:#d32f2f;color:white;padding:20px;border-radius:8px;margin-bottom:20px}
-            .reclamo{background:white;margin:10px 0;padding:15px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);border-left:5px solid #ff5722}
+            .reclamo{background:white;margin:10px 0;padding:15px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);border-left:5px solid #ff5722;position:relative}
+            .reclamo.completado{opacity:0.6;border-left-color:#4caf50}
             .reclamo.critico{border-left-color:#d32f2f}
             .reclamo.alto{border-left-color:#ff9800}
             .reclamo.medio{border-left-color:#4caf50}
@@ -17,18 +18,37 @@
             .direccion{color:#666}
             .problema{background-color:#ffebee;padding:8px;border-radius:4px;margin:8px 0}
             .footer{text-align:center;margin-top:30px;color:#666;font-size:12px}
+            .botones{margin-top:15px;display:flex;gap:10px;flex-wrap:wrap}
+            .btn{padding:10px 20px;border:none;border-radius:5px;cursor:pointer;font-weight:bold;transition:all 0.3s}
+            .btn-completar{background-color:#4caf50;color:white}
+            .btn-completar:hover{background-color:#45a049}
+            .btn-pendiente{background-color:#ff9800;color:white}
+            .btn-pendiente:hover{background-color:#e68900}
+            .trabajo-realizado{background-color:#e8f5e9;padding:10px;border-radius:5px;margin-top:10px;border-left:3px solid #4caf50}
+            .trabajo-realizado strong{color:#2e7d32}
+            .form-trabajo{margin-top:10px;padding:10px;background-color:#f5f5f5;border-radius:5px;display:none}
+            .form-trabajo.visible{display:block}
+            .form-trabajo input, .form-trabajo textarea{width:100%;padding:8px;margin:5px 0;border:1px solid #ddd;border-radius:4px;box-sizing:border-box}
+            .form-trabajo button{margin-top:5px}
+            .btn-small{padding:5px 10px;font-size:12px}
+            .estado-badge{display:inline-block;padding:5px 10px;border-radius:15px;font-size:12px;font-weight:bold;margin-left:10px}
+            .estado-pendiente{background-color:#fff3cd;color:#856404}
+            .estado-completado{background-color:#d4edda;color:#155724}
             @media (max-width:768px){body{margin:10px}}
             </style>
 </head>
 <body>
     <div class="header">
         <h1>🚨 Reclamos Pendientes - Nodosoft </h1>
-        <p>Última actualización: 22/10/2025 15:31:04</p>
-        <p style="margin: 5px 0;"><strong>Total: 5 reclamos pendientes</strong></p>
+        <p>Última actualización: 22/10/2025 15:53:03</p>
+        <p style="margin: 5px 0;"><strong>Total: <span id="totalPendientes">5</span> reclamos pendientes</strong></p>
     </div>
 
-    <div class="reclamo medio" style="border-left-color: #4caf50;">
-        <div class="titulo"> Orden: 00036450</div>
+    <div class="reclamo medio" data-orden="00036450" style="border-left-color: #4caf50;">
+        <div class="titulo">
+            Orden: 00036450
+            <span class="estado-badge estado-pendiente">Pendiente</span>
+        </div>
         <div class="info"><strong>📅 Fecha:</strong> 2025-10-08 19:55:09</div>
         <div class="info"><strong>👨‍💼 Operador:</strong> Alejandra</div>
         <div class="info"><strong>👤 Cliente:</strong> ARANA CAROLINA </div>
@@ -44,10 +64,23 @@
             <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
             <div class="info"><strong>📡 Caja:</strong> T02 | F32 | C05 | P2</div>
         </div>
+        <div class="trabajo-container"></div>
+        <div class="botones">
+            <button class="btn btn-completar" onclick="mostrarFormulario('00036450')">✅ Marcar como Realizado</button>
+        </div>
+        <div class="form-trabajo" id="form-00036450">
+            <input type="text" placeholder="Tu nombre" id="tecnico-00036450">
+            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036450"></textarea>
+            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036450')">Guardar</button>
+            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036450')">Cancelar</button>
+        </div>
     </div>
 
-    <div class="reclamo medio" style="border-left-color: #4caf50;">
-        <div class="titulo"> Orden: 00036465</div>
+    <div class="reclamo medio" data-orden="00036465" style="border-left-color: #4caf50;">
+        <div class="titulo">
+            Orden: 00036465
+            <span class="estado-badge estado-pendiente">Pendiente</span>
+        </div>
         <div class="info"><strong>📅 Fecha:</strong> 2025-10-13 09:35:44</div>
         <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
         <div class="info"><strong>👤 Cliente:</strong> NOGUEIRA MARIA DE LOS ANGELES </div>
@@ -63,10 +96,23 @@
             <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
             
         </div>
+        <div class="trabajo-container"></div>
+        <div class="botones">
+            <button class="btn btn-completar" onclick="mostrarFormulario('00036465')">✅ Marcar como Realizado</button>
+        </div>
+        <div class="form-trabajo" id="form-00036465">
+            <input type="text" placeholder="Tu nombre" id="tecnico-00036465">
+            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036465"></textarea>
+            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036465')">Guardar</button>
+            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036465')">Cancelar</button>
+        </div>
     </div>
 
-    <div class="reclamo medio" style="border-left-color: #4caf50;">
-        <div class="titulo"> Orden: 00036466</div>
+    <div class="reclamo medio" data-orden="00036466" style="border-left-color: #4caf50;">
+        <div class="titulo">
+            Orden: 00036466
+            <span class="estado-badge estado-pendiente">Pendiente</span>
+        </div>
         <div class="info"><strong>📅 Fecha:</strong> 2025-10-13 10:18:22</div>
         <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
         <div class="info"><strong>👤 Cliente:</strong> SUAREZ SILVINA SOLEDAD </div>
@@ -82,10 +128,23 @@
             <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
             
         </div>
+        <div class="trabajo-container"></div>
+        <div class="botones">
+            <button class="btn btn-completar" onclick="mostrarFormulario('00036466')">✅ Marcar como Realizado</button>
+        </div>
+        <div class="form-trabajo" id="form-00036466">
+            <input type="text" placeholder="Tu nombre" id="tecnico-00036466">
+            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036466"></textarea>
+            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036466')">Guardar</button>
+            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036466')">Cancelar</button>
+        </div>
     </div>
 
-    <div class="reclamo medio" style="border-left-color: #4caf50;">
-        <div class="titulo"> Orden: 00036497</div>
+    <div class="reclamo medio" data-orden="00036497" style="border-left-color: #4caf50;">
+        <div class="titulo">
+            Orden: 00036497
+            <span class="estado-badge estado-pendiente">Pendiente</span>
+        </div>
         <div class="info"><strong>📅 Fecha:</strong> 2025-10-15 20:29:53</div>
         <div class="info"><strong>👨‍💼 Operador:</strong> Alejandra</div>
         <div class="info"><strong>👤 Cliente:</strong> FERLINI MARTIN </div>
@@ -101,10 +160,23 @@
             <div class="info"><strong>💰 Plan:</strong> $31000.0</div>
             
         </div>
+        <div class="trabajo-container"></div>
+        <div class="botones">
+            <button class="btn btn-completar" onclick="mostrarFormulario('00036497')">✅ Marcar como Realizado</button>
+        </div>
+        <div class="form-trabajo" id="form-00036497">
+            <input type="text" placeholder="Tu nombre" id="tecnico-00036497">
+            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036497"></textarea>
+            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036497')">Guardar</button>
+            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036497')">Cancelar</button>
+        </div>
     </div>
 
-    <div class="reclamo medio" style="border-left-color: #4caf50;">
-        <div class="titulo"> Orden: 00036518</div>
+    <div class="reclamo medio" data-orden="00036518" style="border-left-color: #4caf50;">
+        <div class="titulo">
+            Orden: 00036518
+            <span class="estado-badge estado-pendiente">Pendiente</span>
+        </div>
         <div class="info"><strong>📅 Fecha:</strong> 2025-10-22 10:48:09</div>
         <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
         <div class="info"><strong>👤 Cliente:</strong> DEMARCHI OSCAR (CASA) </div>
@@ -120,11 +192,154 @@
             <div class="info"><strong>💰 Plan:</strong> $16000.0</div>
             
         </div>
+        <div class="trabajo-container"></div>
+        <div class="botones">
+            <button class="btn btn-completar" onclick="mostrarFormulario('00036518')">✅ Marcar como Realizado</button>
+        </div>
+        <div class="form-trabajo" id="form-00036518">
+            <input type="text" placeholder="Tu nombre" id="tecnico-00036518">
+            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036518"></textarea>
+            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036518')">Guardar</button>
+            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036518')">Cancelar</button>
+        </div>
     </div>
 
     <div class="footer">
         <p>Sistema automático de monitoreo de reclamos | Se actualiza cada 15 minutos</p>
-        <p>Archivo fuente: Z:\Office\Mariano\Programacion\SERVTEC\ORDSERVI.DBF</p>
+        <p>Los trabajos realizados se guardan y son visibles para todo el equipo</p>
     </div>
+
+    <script>
+        window.addEventListener('load', cargarTrabajos);
+
+        function mostrarFormulario(orden) {
+            document.getElementById('form-' + orden).classList.add('visible');
+        }
+
+        function ocultarFormulario(orden) {
+            document.getElementById('form-' + orden).classList.remove('visible');
+        }
+
+        async function guardarTrabajo(orden) {
+            const tecnico = document.getElementById('tecnico-' + orden).value.trim();
+            const descripcion = document.getElementById('descripcion-' + orden).value.trim();
+            
+            if (!tecnico || !descripcion) {
+                alert('Por favor completa tu nombre y la descripción del trabajo');
+                return;
+            }
+
+            const trabajo = {
+                tecnico: tecnico,
+                descripcion: descripcion,
+                fecha: new Date().toLocaleString('es-AR')
+            };
+
+            try {
+                await window.storage.set('trabajo-' + orden, JSON.stringify(trabajo), true);
+                mostrarTrabajo(orden, trabajo);
+                ocultarFormulario(orden);
+                document.getElementById('tecnico-' + orden).value = '';
+                document.getElementById('descripcion-' + orden).value = '';
+                actualizarEstado(orden, true);
+            } catch (error) {
+                console.error('Error al guardar:', error);
+                alert('Error al guardar el trabajo. Intenta de nuevo.');
+            }
+        }
+
+        function mostrarTrabajo(orden, trabajo) {
+            const container = document.querySelector(`[data-orden="${orden}"] .trabajo-container`);
+            container.innerHTML = `
+                <div class="trabajo-realizado">
+                    <strong>✅ Trabajo Realizado</strong><br>
+                    <strong>👤 Técnico:</strong> ${trabajo.tecnico}<br>
+                    <strong>📅 Fecha:</strong> ${trabajo.fecha}<br>
+                    <strong>📝 Descripción:</strong> ${trabajo.descripcion}
+                </div>
+            `;
+        }
+
+        function actualizarEstado(orden, completado) {
+            const reclamo = document.querySelector(`[data-orden="${orden}"]`);
+            const badge = reclamo.querySelector('.estado-badge');
+            const botonContainer = reclamo.querySelector('.botones');
+            
+            if (completado) {
+                reclamo.classList.add('completado');
+                badge.textContent = 'Completado';
+                badge.classList.remove('estado-pendiente');
+                badge.classList.add('estado-completado');
+                botonContainer.innerHTML = `
+                    <button class="btn btn-pendiente" onclick="marcarPendiente('${orden}')">↩️ Volver a Pendiente</button>
+                `;
+            } else {
+                reclamo.classList.remove('completado');
+                badge.textContent = 'Pendiente';
+                badge.classList.remove('estado-completado');
+                badge.classList.add('estado-pendiente');
+                botonContainer.innerHTML = `
+                    <button class="btn btn-completar" onclick="mostrarFormulario('${orden}')">✅ Marcar como Realizado</button>
+                `;
+            }
+            actualizarContador();
+        }
+
+        async function marcarPendiente(orden) {
+            try {
+                await window.storage.delete('trabajo-' + orden, true);
+                const container = document.querySelector(`[data-orden="${orden}"] .trabajo-container`);
+                container.innerHTML = '';
+                actualizarEstado(orden, false);
+            } catch (error) {
+                console.error('Error al eliminar:', error);
+            }
+        }
+
+        async function cargarTrabajos() {
+            const ordenesActuales = Array.from(document.querySelectorAll('[data-orden]'))
+                .map(el => el.getAttribute('data-orden'));
+            
+            console.log('Órdenes actuales:', ordenesActuales);
+            
+            try {
+                const result = await window.storage.list('trabajo-', true);
+                if (result && result.keys) {
+                    console.log('Trabajos guardados:', result.keys);
+                    
+                    for (const key of result.keys) {
+                        const orden = key.replace('trabajo-', '');
+                        
+                        if (!ordenesActuales.includes(orden)) {
+                            console.log(`Eliminando trabajo de orden antigua: ${orden}`);
+                            await window.storage.delete(key, true);
+                        } else {
+                            try {
+                                const trabajoResult = await window.storage.get(key, true);
+                                if (trabajoResult && trabajoResult.value) {
+                                    const trabajo = JSON.parse(trabajoResult.value);
+                                    mostrarTrabajo(orden, trabajo);
+                                    actualizarEstado(orden, true);
+                                }
+                            } catch (error) {
+                                console.error(`Error al cargar trabajo de ${orden}:`, error);
+                            }
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error al listar trabajos:', error);
+            }
+            
+            actualizarContador();
+        }
+
+        function actualizarContador() {
+            const totalReclamos = document.querySelectorAll('.reclamo').length;
+            const completados = document.querySelectorAll('.reclamo.completado').length;
+            const pendientes = totalReclamos - completados;
+            document.getElementById('totalPendientes').textContent = pendientes;
+        }
+    </script>
 </body>
 </html>
