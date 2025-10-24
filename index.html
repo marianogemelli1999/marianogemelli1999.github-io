@@ -4,342 +4,792 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reclamos Pendientes - Dashboard Técnicos</title>
-    <style>body{font-family:Arial,sans-serif;margin:20px;background-color:#f5f5f5}.header{background-color:#d32f2f;color:white;padding:20px;border-radius:8px;margin-bottom:20px}.reclamo{background:white;margin:10px 0;padding:15px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);border-left:5px solid #ff5722;position:relative}.reclamo.completado{opacity:0.6;border-left-color:#4caf50}.titulo{color:#d32f2f;font-size:18px;font-weight:bold}.info{margin:5px 0}.telefono{font-size:18px;font-weight:bold;color:#1976d2}.direccion{color:#666}.problema{background-color:#ffebee;padding:8px;border-radius:4px;margin:8px 0}.footer{text-align:center;margin-top:30px;color:#666;font-size:12px}.botones{margin-top:15px;display:flex;gap:10px;flex-wrap:wrap}.btn{padding:10px 20px;border:none;border-radius:5px;cursor:pointer;font-weight:bold;transition:all 0.3s}.btn-completar{background-color:#4caf50;color:white}.btn-completar:hover{background-color:#45a049}.btn-pendiente{background-color:#ff9800;color:white}.btn-pendiente:hover{background-color:#e68900}.trabajo-realizado{background-color:#e8f5e9;padding:10px;border-radius:5px;margin-top:10px;border-left:3px solid #4caf50}.trabajo-realizado strong{color:#2e7d32}.form-trabajo{margin-top:10px;padding:10px;background-color:#f5f5f5;border-radius:5px;display:none}.form-trabajo.visible{display:block}.form-trabajo input,.form-trabajo textarea{width:100%;padding:8px;margin:5px 0;border:1px solid #ddd;border-radius:4px;box-sizing:border-box}.form-trabajo button{margin-top:5px}.btn-small{padding:5px 10px;font-size:12px}.estado-badge{display:inline-block;padding:5px 10px;border-radius:15px;font-size:12px;font-weight:bold;margin-left:10px}.estado-pendiente{background-color:#fff3cd;color:#856404}.estado-completado{background-color:#d4edda;color:#155724}@media (max-width:768px){body{margin:10px}}</style>
+    <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px;min-height:100vh}.container{max-width:1400px;margin:0 auto}.header{background:#1e293b;padding:30px;border-radius:12px;margin-bottom:30px;border:1px solid #334155}.header h1{color:#f1f5f9;font-size:32px;margin-bottom:10px;font-weight:700}.header-content{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:20px;border-top:1px solid #334155;flex-direction:row-reverse}.update-info{color:#94a3b8;font-size:14px}.contador-pendientes{text-align:center;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);padding:20px 40px;border-radius:12px;box-shadow:0 0 30px rgba(99,102,241,0.3)}.contador-numero{font-size:56px;font-weight:800;color:white;line-height:1}.contador-label{color:rgba(255,255,255,0.9);font-size:14px;text-transform:uppercase;font-weight:600;margin-top:8px;letter-spacing:1px}.reclamo{background:#1e293b;margin-bottom:15px;border-radius:12px;border:1px solid #334155;overflow:hidden;transition:all 0.3s ease;cursor:pointer}.reclamo:hover{border-left-color:#6366f1;box-shadow:0 0 30px rgba(99,102,241,0.2)}.reclamo.expandido{cursor:default}.reclamo-compacto{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:15px}.reclamo-compacto-info{flex:1;display:flex;gap:20px;align-items:center}.orden-compacto{font-size:16px;font-weight:700;color:#6366f1;min-width:120px}.cliente-compacto{font-size:16px;font-weight:600;color:#f1f5f9;flex:1}.problema-compacto{font-size:16px;color:#cbd5e1;flex:1.2;font-weight:600}.icono-expandir{color:#6366f1;font-size:20px;transition:transform 0.3s ease}.reclamo.expandido .icono-expandir{transform:rotate(180deg)}.reclamo-detalle{max-height:0;overflow:hidden;transition:max-height 0.4s ease}.reclamo.expandido .reclamo-detalle{max-height:2000px}.reclamo-top{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);padding:20px;border-bottom:1px solid #334155;border-top:1px solid #334155;display:flex;justify-content:space-between;align-items:center}.orden-numero{font-size:24px;font-weight:700;color:#6366f1}.fecha-info{color:#94a3b8;font-size:14px}.reclamo-content{padding:25px}.cliente-section{display:flex;gap:30px;margin-bottom:25px;padding-bottom:20px;border-bottom:1px solid #334155}.cliente-info{flex:1}.cliente-nombre{font-size:20px;font-weight:600;color:#f1f5f9;margin-bottom:10px}.contacto{display:flex;gap:20px;color:#94a3b8;font-size:14px}.contacto span{display:flex;align-items:center;gap:8px}.problema-section{background:rgba(239,68,68,0.1);border-left:3px solid #ef4444;padding:15px;border-radius:8px;margin:20px 0}.problema-title{color:#fca5a5;font-weight:600;margin-bottom:8px}.problema-detalle{color:#e2e8f0;line-height:1.6}.tecnico-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;background:rgba(99,102,241,0.05);padding:20px;border-radius:8px;border:1px solid rgba(99,102,241,0.2)}.tecnico-label{color:#6366f1;font-size:12px;font-weight:600;text-transform:uppercase}.tecnico-value{color:#cbd5e1;font-size:14px}.btn{margin-top:20px;padding:14px 28px;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:15px;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);color:white;transition:all 0.3s ease}.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(99,102,241,0.3)}.estado-badge{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase}.badge-pendiente{background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid #fbbf24}.badge-completado{background:rgba(34,197,94,0.2);color:#22c55e;border:1px solid #22c55e}.form-trabajo{margin-top:15px;padding:15px;background:rgba(15,23,42,0.5);border-radius:8px;border:1px solid #334155;display:none}.form-trabajo.visible{display:block}.form-trabajo input,.form-trabajo textarea{width:100%;padding:10px;margin:8px 0;background:#1e293b;border:1px solid #334155;border-radius:6px;color:#e2e8f0;font-size:14px}.form-trabajo input:focus,.form-trabajo textarea:focus{outline:none;border-color:#6366f1}.form-trabajo button{margin-top:10px;margin-right:10px}.trabajo-realizado{background:rgba(34,197,94,0.1);border-left:3px solid #22c55e;padding:15px;border-radius:8px;margin-top:15px}.trabajo-realizado strong{color:#22c55e}@media (max-width:768px){.header-content{flex-direction:column;gap:20px;text-align:center}.contador-pendientes{width:100%}.reclamo-compacto-info{flex-direction:column;align-items:flex-start;gap:8px}}</style>
 </head>
 <body>
-    <div class="header">
-        <h1>🚨 Reclamos Pendientes - Nodosoft</h1>
-        <p>Última actualización: 24/10/2025 14:01:07</p>
-        <p style="margin: 5px 0;"><strong>Total: <span id="totalPendientes">10</span> reclamos pendientes</strong></p>
-    </div>
+    <div class="container">
+        <div class="header">
+            <h1>🛠️ Dashboard Técnico - Nodosoft</h1>
+            <div class="header-content">
+                <div class="update-info">Última actualización: 24/10/2025 14:28:58</div>
+                <div class="contador-pendientes">
+                    <div class="contador-numero" id="totalPendientes">10</div>
+                    <div class="contador-label">Reclamos Pendientes</div>
+                </div>
+            </div>
+        </div>
 
-    <div class="reclamo" data-orden="00036450" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036450
-            <span class="estado-badge estado-pendiente">Pendiente</span>
-        </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-08 19:55:09</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Alejandra</div>
-        <div class="info"><strong>👤 Cliente:</strong> ARANA CAROLINA</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> BARRIO PLAN FEDERAL 19 V. CASA 8</div>
-        <div class="telefono">📞 02396-1543-8749</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Otros Motivos</div>
-        <div class="info"><strong>📝 Detalle:</strong> SE LE CORTA TODO EL TIEMPO, NO LE CONECTA YOUTUBE, NO TIENE APP DE CANALES</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.106.202</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Fibra Optica VLAN700</div>
-            <div class="info"><strong>📦 Equipo:</strong> Onu Huawei EG-8021V5 Wi-Fi Dual Band</div>
-            <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
-            <div class="info"><strong>📡 Caja:</strong> T02 | F32 | C05 | P2</div>
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036450')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036450">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036450">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036450"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036450')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036450')">Cancelar</button>
-        </div>
-    </div>
-
-    <div class="reclamo" data-orden="00036465" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036465
-            <span class="estado-badge estado-pendiente">Pendiente</span>
-        </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-13 09:35:44</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
-        <div class="info"><strong>👤 Cliente:</strong> NOGUEIRA MARIA DE LOS ANGELES</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> LAVALLE 834 (BARRIO ESPERANZA)</div>
-        <div class="telefono">📞 02395-1543-1970</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Otros Motivos</div>
-        <div class="info"><strong>📝 Detalle:</strong> PUSO CAMARAS SE LE CORTA CONSTANTEMENTE , COMPRO UN REPETIDOR NO FUNCIONA</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.245.090</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Germano</div>
-            <div class="info"><strong>📦 Equipo:</strong> Nanostation Loco AC</div>
-            <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
+        <div class="reclamo" data-orden="00036450" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036450</div>
+                    <div class="cliente-compacto">👤 ARANA CAROLINA</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
             
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036465')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036465">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036465">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036465"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036465')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036465')">Cancelar</button>
-        </div>
-    </div>
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036450</div>
+                        <div class="fecha-info">📅 2025-10-08 19:55:09 • Operador: Alejandra</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 ARANA CAROLINA</div>
+                            <div class="contacto">
+                                <span>📞 02396-1543-8749</span>
+                                <span>📍 BARRIO PLAN FEDERAL 19 V. CASA 8</span>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="reclamo" data-orden="00036466" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036466
-            <span class="estado-badge estado-pendiente">Pendiente</span>
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">SE LE CORTA TODO EL TIEMPO, NO LE CONECTA YOUTUBE, NO TIENE APP DE CANALES</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.106.202</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei EG-8021V5 Wi-Fi Dual Band</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T02 | F32 | C05 | P2</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036450')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036450">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036450">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036450"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036450')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036450')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-13 10:18:22</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
-        <div class="info"><strong>👤 Cliente:</strong> SUAREZ SILVINA SOLEDAD</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> PAPA FRANCISCO 728</div>
-        <div class="telefono">📞 02395-1540-0208</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Otros Motivos</div>
-        <div class="info"><strong>📝 Detalle:</strong> CORTES CONSTANTEMENTE, CAMBIO EL ROUTER CAMBIO ABONO SIGUE SIN FUNCIONAR .</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.222.070</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Evangelista</div>
-            <div class="info"><strong>📦 Equipo:</strong> Nanostation Loco AC</div>
-            <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
+
+        <div class="reclamo" data-orden="00036465" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036465</div>
+                    <div class="cliente-compacto">👤 NOGUEIRA MARIA DE LOS ANGELES</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
             
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036466')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036466">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036466">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036466"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036466')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036466')">Cancelar</button>
-        </div>
-    </div>
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036465</div>
+                        <div class="fecha-info">📅 2025-10-13 09:35:44 • Operador: Cintia</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 NOGUEIRA MARIA DE LOS ANGELES</div>
+                            <div class="contacto">
+                                <span>📞 02395-1543-1970</span>
+                                <span>📍 LAVALLE 834 (BARRIO ESPERANZA)</span>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="reclamo" data-orden="00036497" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036497
-            <span class="estado-badge estado-pendiente">Pendiente</span>
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">PUSO CAMARAS SE LE CORTA CONSTANTEMENTE , COMPRO UN REPETIDOR NO FUNCIONA</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.245.090</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Germano</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Nanostation Loco AC</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036465')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036465">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036465">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036465"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036465')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036465')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-15 20:29:53</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Alejandra</div>
-        <div class="info"><strong>👤 Cliente:</strong> FERLINI MARTIN</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> SANTO TOMAS - CAMPO SANTA ANA</div>
-        <div class="telefono">📞 011-15-5424-9772</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Sin Conexion</div>
-        <div class="info"><strong>📝 Detalle:</strong> SIN CONEXION</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.220.024</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Santo Tomas</div>
-            <div class="info"><strong>📦 Equipo:</strong> LiteBeam M5</div>
-            <div class="info"><strong>💰 Plan:</strong> $31000.0</div>
+
+        <div class="reclamo" data-orden="00036466" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036466</div>
+                    <div class="cliente-compacto">👤 SUAREZ SILVINA SOLEDAD</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
             
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036497')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036497">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036497">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036497"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036497')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036497')">Cancelar</button>
-        </div>
-    </div>
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036466</div>
+                        <div class="fecha-info">📅 2025-10-13 10:18:22 • Operador: Cintia</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 SUAREZ SILVINA SOLEDAD</div>
+                            <div class="contacto">
+                                <span>📞 02395-1540-0208</span>
+                                <span>📍 PAPA FRANCISCO 728</span>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="reclamo" data-orden="00036518" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036518
-            <span class="estado-badge estado-pendiente">Pendiente</span>
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">CORTES CONSTANTEMENTE, CAMBIO EL ROUTER CAMBIO ABONO SIGUE SIN FUNCIONAR .</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.222.070</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Evangelista</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Nanostation Loco AC</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036466')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036466">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036466">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036466"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036466')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036466')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-22 10:48:09</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
-        <div class="info"><strong>👤 Cliente:</strong> DEMARCHI OSCAR (CASA)</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> DORREGO 515</div>
-        <div class="telefono">📞 02395450330011-15-6758-472</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Sin Conexion</div>
-        <div class="info"><strong>📝 Detalle:</strong> SIN CONEXION</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.248.026</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Bomberos</div>
-            <div class="info"><strong>📦 Equipo:</strong> Nanostation Loco M5</div>
-            <div class="info"><strong>💰 Plan:</strong> $16000.0</div>
+
+        <div class="reclamo" data-orden="00036497" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036497</div>
+                    <div class="cliente-compacto">👤 FERLINI MARTIN</div>
+                    <div class="problema-compacto">🔧 Sin Conexion</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
             
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036518')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036518">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036518">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036518"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036518')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036518')">Cancelar</button>
-        </div>
-    </div>
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036497</div>
+                        <div class="fecha-info">📅 2025-10-15 20:29:53 • Operador: Alejandra</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 FERLINI MARTIN</div>
+                            <div class="contacto">
+                                <span>📞 011-15-5424-9772</span>
+                                <span>📍 SANTO TOMAS - CAMPO SANTA ANA</span>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="reclamo" data-orden="00036520" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036520
-            <span class="estado-badge estado-pendiente">Pendiente</span>
-        </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-23 11:15:39</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
-        <div class="info"><strong>👤 Cliente:</strong> AGUILERA ELISABET</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> GUIDO 454</div>
-        <div class="telefono">📞 02395-1547-0036</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Otros Motivos</div>
-        <div class="info"><strong>📝 Detalle:</strong> SE CORTAN CONSTANTEMENTE LAS APLICACIONES</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.102.159</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Fibra Optica VLAN700</div>
-            <div class="info"><strong>📦 Equipo:</strong> Onu Huawei HG-8546M Wi-Fi</div>
-            <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
-            <div class="info"><strong>📡 Caja:</strong> T03 | F30 | C02 | P2</div>
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036520')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036520">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036520">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036520"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036520')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036520')">Cancelar</button>
-        </div>
-    </div>
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Sin Conexion</div>
+                        <div class="problema-detalle">SIN CONEXION</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
 
-    <div class="reclamo" data-orden="00036521" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036521
-            <span class="estado-badge estado-pendiente">Pendiente</span>
-        </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-23 15:55:45</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
-        <div class="info"><strong>👤 Cliente:</strong> CABALCAGARAY CECILIA</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> CHUBUT 635</div>
-        <div class="telefono">📞 02395-1540-3682</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Drop cortado</div>
-        <div class="info"><strong>📝 Detalle:</strong> DROP CORTADO</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.105.098</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Fibra Optica VLAN700</div>
-            <div class="info"><strong>📦 Equipo:</strong> Onu Huawei EG-8141A5 Wi-Fi</div>
-            <div class="info"><strong>💰 Plan:</strong> $16000.0</div>
-            <div class="info"><strong>📡 Caja:</strong> T03 | F25 | C06 | P1</div>
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036521')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036521">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036521">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036521"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036521')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036521')">Cancelar</button>
-        </div>
-    </div>
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.220.024</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Santo Tomas</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">LiteBeam M5</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$31000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
 
-    <div class="reclamo" data-orden="00036523" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036523
-            <span class="estado-badge estado-pendiente">Pendiente</span>
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036497')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036497">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036497">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036497"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036497')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036497')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-24 08:55:37</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Alejandra</div>
-        <div class="info"><strong>👤 Cliente:</strong> BERNTZ OSVALDO</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> ZAPIOLA 609</div>
-        <div class="telefono">📞 02395-15422601</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Sin Conexion</div>
-        <div class="info"><strong>📝 Detalle:</strong> SIN CONEXION</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.106.215</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Fibra Optica VLAN700</div>
-            <div class="info"><strong>📦 Equipo:</strong> Onu Huawei HG-8245H5 Wi-Fi</div>
-            <div class="info"><strong>💰 Plan:</strong> $16000.0</div>
-            <div class="info"><strong>📡 Caja:</strong> T03 | F25 | C07 | P2</div>
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036523')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036523">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036523">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036523"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036523')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036523')">Cancelar</button>
-        </div>
-    </div>
 
-    <div class="reclamo" data-orden="00036524" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036524
-            <span class="estado-badge estado-pendiente">Pendiente</span>
-        </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-24 10:40:40</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
-        <div class="info"><strong>👤 Cliente:</strong> ALONSO GERMAN CRUZ</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> BARRIO C. ARROYO CASA 59</div>
-        <div class="telefono">📞 02396-1562-6217</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Cortes aplicaciones TV</div>
-        <div class="info"><strong>📝 Detalle:</strong> CORTES APLICACIONES TV</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.108.169</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Fibra Optica VLAN700</div>
-            <div class="info"><strong>📦 Equipo:</strong> Onu Huawei HG-8145V5 Wi-Fi Dual Band</div>
-            <div class="info"><strong>💰 Plan:</strong> $18000.0</div>
-            <div class="info"><strong>📡 Caja:</strong> T01 | F16 | C08 | P3</div>
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036524')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036524">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036524">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036524"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036524')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036524')">Cancelar</button>
-        </div>
-    </div>
+        <div class="reclamo" data-orden="00036518" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036518</div>
+                    <div class="cliente-compacto">👤 DEMARCHI OSCAR (CASA)</div>
+                    <div class="problema-compacto">🔧 Sin Conexion</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036518</div>
+                        <div class="fecha-info">📅 2025-10-22 10:48:09 • Operador: Cintia</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 DEMARCHI OSCAR (CASA)</div>
+                            <div class="contacto">
+                                <span>📞 02395450330011-15-6758-472</span>
+                                <span>📍 DORREGO 515</span>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="reclamo" data-orden="00036525" style="border-left-color: #4caf50;">
-        <div class="titulo">
-            Orden: 00036525
-            <span class="estado-badge estado-pendiente">Pendiente</span>
-        </div>
-        <div class="info"><strong>📅 Fecha:</strong> 2025-10-24 11:17:36</div>
-        <div class="info"><strong>👨‍💼 Operador:</strong> Cintia</div>
-        <div class="info"><strong>👤 Cliente:</strong> DIODATO IVANA DEBORA</div>
-        <div class="direccion"><strong>📍 Dirección:</strong> LAS HERAS 188</div>
-        <div class="telefono">📞 02395-1546-7243</div>
-        <div class="problema"><strong>🔧 Problema:</strong> Otros Motivos</div>
-        <div class="info"><strong>📝 Detalle:</strong> TIENE MICRO CORTES EN PAGINAS NORMALES , O CUANDO TRABAJA REMOTO.</div>
-        <div class="info"><strong>📋 Observaciones:</strong> Sin observaciones</div>
-        <div style="background-color: #e3f2fd; padding: 10px; border-radius: 4px; margin: 8px 0;">
-            <div class="info"><strong>🌐 IP Cliente:</strong> 192.168.101.046</div>
-            <div class="info"><strong>🗼 Conectado a:</strong> Fibra Optica VLAN700</div>
-            <div class="info"><strong>📦 Equipo:</strong> Onu Huawei HG-8546M Wi-Fi</div>
-            <div class="info"><strong>💰 Plan:</strong> $16000.0</div>
-            <div class="info"><strong>📡 Caja:</strong> T01 | F37 | C05 | P1</div>
-        </div>
-        <div class="trabajo-container"></div>
-        <div class="botones">
-            <button class="btn btn-completar" onclick="mostrarFormulario('00036525')">✅ Marcar como Realizado</button>
-        </div>
-        <div class="form-trabajo" id="form-00036525">
-            <input type="text" placeholder="Tu nombre" id="tecnico-00036525">
-            <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036525"></textarea>
-            <button class="btn btn-completar btn-small" onclick="guardarTrabajo('00036525')">Guardar</button>
-            <button class="btn btn-pendiente btn-small" onclick="ocultarFormulario('00036525')">Cancelar</button>
-        </div>
-    </div>
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Sin Conexion</div>
+                        <div class="problema-detalle">SIN CONEXION</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
 
-    <div class="footer">
-        <p>Sistema automático de monitoreo de reclamos | Se actualiza automáticamente</p>
-        <p>Los trabajos realizados se guardan en GitHub y son visibles para todo el equipo</p>
-    </div>
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.248.026</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Bomberos</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Nanostation Loco M5</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$16000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036518')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036518">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036518">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036518"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036518')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036518')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036520" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036520</div>
+                    <div class="cliente-compacto">👤 AGUILERA ELISABET</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036520</div>
+                        <div class="fecha-info">📅 2025-10-23 11:15:39 • Operador: Cintia</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 AGUILERA ELISABET</div>
+                            <div class="contacto">
+                                <span>📞 02395-1547-0036</span>
+                                <span>📍 GUIDO 454</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">SE CORTAN CONSTANTEMENTE LAS APLICACIONES</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.102.159</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei HG-8546M Wi-Fi</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T03 | F30 | C02 | P2</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036520')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036520">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036520">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036520"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036520')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036520')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036521" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036521</div>
+                    <div class="cliente-compacto">👤 CABALCAGARAY CECILIA</div>
+                    <div class="problema-compacto">🔧 Drop cortado</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036521</div>
+                        <div class="fecha-info">📅 2025-10-23 15:55:45 • Operador: Cintia</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 CABALCAGARAY CECILIA</div>
+                            <div class="contacto">
+                                <span>📞 02395-1540-3682</span>
+                                <span>📍 CHUBUT 635</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Drop cortado</div>
+                        <div class="problema-detalle">DROP CORTADO</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.105.098</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei EG-8141A5 Wi-Fi</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$16000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T03 | F25 | C06 | P1</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036521')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036521">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036521">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036521"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036521')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036521')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036523" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036523</div>
+                    <div class="cliente-compacto">👤 BERNTZ OSVALDO</div>
+                    <div class="problema-compacto">🔧 Sin Conexion</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036523</div>
+                        <div class="fecha-info">📅 2025-10-24 08:55:37 • Operador: Alejandra</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 BERNTZ OSVALDO</div>
+                            <div class="contacto">
+                                <span>📞 02395-15422601</span>
+                                <span>📍 ZAPIOLA 609</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Sin Conexion</div>
+                        <div class="problema-detalle">SIN CONEXION</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.106.215</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei HG-8245H5 Wi-Fi</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$16000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T03 | F25 | C07 | P2</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036523')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036523">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036523">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036523"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036523')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036523')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036524" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036524</div>
+                    <div class="cliente-compacto">👤 ALONSO GERMAN CRUZ</div>
+                    <div class="problema-compacto">🔧 Cortes aplicaciones TV</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036524</div>
+                        <div class="fecha-info">📅 2025-10-24 10:40:40 • Operador: Cintia</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 ALONSO GERMAN CRUZ</div>
+                            <div class="contacto">
+                                <span>📞 02396-1562-6217</span>
+                                <span>📍 BARRIO C. ARROYO CASA 59</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Cortes aplicaciones TV</div>
+                        <div class="problema-detalle">CORTES APLICACIONES TV</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.108.169</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei HG-8145V5 Wi-Fi Dual Band</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T01 | F16 | C08 | P3</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036524')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036524">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036524">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036524"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036524')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036524')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036525" onclick="toggleReclamo(this)">
+            <div class="reclamo-compacto">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Orden #00036525</div>
+                    <div class="cliente-compacto">👤 DIODATO IVANA DEBORA</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-top">
+                    <div>
+                        <div class="orden-numero">Orden #00036525</div>
+                        <div class="fecha-info">📅 2025-10-24 11:17:36 • Operador: Cintia</div>
+                    </div>
+                    <span class="estado-badge badge-pendiente">Pendiente</span>
+                </div>
+                <div class="reclamo-content">
+                    <div class="cliente-section">
+                        <div class="cliente-info">
+                            <div class="cliente-nombre">👤 DIODATO IVANA DEBORA</div>
+                            <div class="contacto">
+                                <span>📞 02395-1546-7243</span>
+                                <span>📍 LAS HERAS 188</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">TIENE MICRO CORTES EN PAGINAS NORMALES , O CUANDO TRABAJA REMOTO.</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.101.046</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei HG-8546M Wi-Fi</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$16000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T01 | F37 | C05 | P1</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036525')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036525">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036525">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036525"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036525')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036525')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script>
-        // Token ofuscado
         const _tk = ['Z2hwX3BRTmw=','TXJRbzNldWc=','RjNUQ1JPdmE=','ZDVpT2tlM2U=','b2gwakdwWmQ='];
         const REPO_OWNER = 'marianogemelli1999';
         const REPO_NAME = 'marianogemelli1999.github-io';
@@ -350,6 +800,10 @@
         }
 
         window.addEventListener('load', cargarTrabajos);
+
+        function toggleReclamo(elemento) {
+            elemento.classList.toggle('expandido');
+        }
 
         function mostrarFormulario(orden) {
             document.getElementById('form-' + orden).classList.add('visible');
@@ -481,18 +935,18 @@
             if (completado) {
                 reclamo.classList.add('completado');
                 badge.textContent = 'Completado';
-                badge.classList.remove('estado-pendiente');
-                badge.classList.add('estado-completado');
+                badge.classList.remove('badge-pendiente');
+                badge.classList.add('badge-completado');
                 botonContainer.innerHTML = `
-                    <button class="btn btn-pendiente" onclick="marcarPendiente('${orden}')">↩️ Volver a Pendiente</button>
+                    <button class="btn" style="background:#64748b" onclick="event.stopPropagation();marcarPendiente('${orden}')">↩️ Volver a Pendiente</button>
                 `;
             } else {
                 reclamo.classList.remove('completado');
                 badge.textContent = 'Pendiente';
-                badge.classList.remove('estado-completado');
-                badge.classList.add('estado-pendiente');
+                badge.classList.remove('badge-completado');
+                badge.classList.add('badge-pendiente');
                 botonContainer.innerHTML = `
-                    <button class="btn btn-completar" onclick="mostrarFormulario('${orden}')">✅ Marcar como Realizado</button>
+                    <button class="btn" onclick="event.stopPropagation();mostrarFormulario('${orden}')">✅ Marcar como Realizado</button>
                 `;
             }
             actualizarContador();
@@ -565,5 +1019,6 @@
             document.getElementById('totalPendientes').textContent = pendientes;
         }
     </script>
+    </div>
 </body>
 </html>
