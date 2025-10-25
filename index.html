@@ -11,9 +11,9 @@
         <div class="header">
             <h1>🛠️ Dashboard Técnico - Nodosoft</h1>
             <div class="header-content">
-                <div class="update-info">Última actualización: 25/10/2025 12:48:14</div>
+                <div class="update-info">Última actualización: 25/10/2025 13:08:55</div>
                 <div class="contador-pendientes">
-                    <div class="contador-numero" id="totalPendientes">6</div>
+                    <div class="contador-numero" id="totalPendientes">11</div>
                     <div class="contador-label">Reclamos Pendientes</div>
                 </div>
             </div>
@@ -155,6 +155,210 @@
             </div>
         </div>
 
+        <div class="reclamo" data-orden="00036466">
+            <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Nº 00036466 <span style="color:#94a3b8;font-weight:400;margin-left:10px">2025-10-13</span></div>
+                    <div class="cliente-compacto">👤 SUAREZ SILVINA SOLEDAD</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <span class="estado-badge badge-pendiente">Pendiente</span>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-content" style="padding-top:25px">
+                    <div class="cliente-section">
+                        <div class="contacto" style="flex-direction:column;gap:8px">
+                            <span style="width:100%">📞 02395-1540-0208</span>
+                            <span style="width:100%">📍 PAPA FRANCISCO 728</span>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">CORTES CONSTANTEMENTE, CAMBIO EL ROUTER CAMBIO ABONO SIGUE SIN FUNCIONAR .</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.222.070</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Evangelista</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Nanostation Loco AC</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036466')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036466">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036466">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036466"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036466')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036466')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036497">
+            <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Nº 00036497 <span style="color:#94a3b8;font-weight:400;margin-left:10px">2025-10-15</span></div>
+                    <div class="cliente-compacto">👤 FERLINI MARTIN</div>
+                    <div class="problema-compacto">🔧 Sin Conexion</div>
+                </div>
+                <span class="estado-badge badge-pendiente">Pendiente</span>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-content" style="padding-top:25px">
+                    <div class="cliente-section">
+                        <div class="contacto" style="flex-direction:column;gap:8px">
+                            <span style="width:100%">📞 011-15-5424-9772</span>
+                            <span style="width:100%">📍 SANTO TOMAS - CAMPO SANTA ANA</span>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Sin Conexion</div>
+                        <div class="problema-detalle">SIN CONEXION</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.220.024</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Santo Tomas</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">LiteBeam M5</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$31000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036497')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036497">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036497">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036497"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036497')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036497')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036524">
+            <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Nº 00036524 <span style="color:#94a3b8;font-weight:400;margin-left:10px">2025-10-24</span></div>
+                    <div class="cliente-compacto">👤 ALONSO GERMAN CRUZ</div>
+                    <div class="problema-compacto">🔧 Cortes aplicaciones TV</div>
+                </div>
+                <span class="estado-badge badge-pendiente">Pendiente</span>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-content" style="padding-top:25px">
+                    <div class="cliente-section">
+                        <div class="contacto" style="flex-direction:column;gap:8px">
+                            <span style="width:100%">📞 02396-1562-6217</span>
+                            <span style="width:100%">📍 BARRIO C. ARROYO CASA 59</span>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Cortes aplicaciones TV</div>
+                        <div class="problema-detalle">CORTES APLICACIONES TV</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.108.169</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei HG-8145V5 Wi-Fi Dual Band</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T01 | F16 | C08 | P3</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036524')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036524">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036524">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036524"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036524')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036524')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="reclamo" data-orden="00036525">
             <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
                 <div class="reclamo-compacto-info">
@@ -238,7 +442,7 @@
                 <div class="reclamo-content" style="padding-top:25px">
                     <div class="cliente-section">
                         <div class="contacto" style="flex-direction:column;gap:8px">
-                            <span style="width:100%">📞 (02395) 453343</span>
+                            <span style="width:100%">📞 02395453343</span>
                             <span style="width:100%">📍 DORREGO 409</span>
                         </div>
                     </div>
@@ -286,6 +490,142 @@
                         <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036526"></textarea>
                         <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036526')">Guardar</button>
                         <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036526')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036527">
+            <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Nº 00036527 <span style="color:#94a3b8;font-weight:400;margin-left:10px">2025-10-24</span></div>
+                    <div class="cliente-compacto">👤 ROLDAN CRISTIAN PEDRO</div>
+                    <div class="problema-compacto">🔧 Sin Conexion</div>
+                </div>
+                <span class="estado-badge badge-pendiente">Pendiente</span>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-content" style="padding-top:25px">
+                    <div class="cliente-section">
+                        <div class="contacto" style="flex-direction:column;gap:8px">
+                            <span style="width:100%">📞 02395-1541-8212</span>
+                            <span style="width:100%">📍 CATAMARCA Y USHUAIA (CASA ADELANTE)</span>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Sin Conexion</div>
+                        <div class="problema-detalle">SIN CONEXION</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.110.093</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei EG-8021V5 Wi-Fi Dual Band</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$18000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T01 | F10 | C05 | P2</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036527')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036527">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036527">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036527"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036527')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036527')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036528">
+            <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Nº 00036528 <span style="color:#94a3b8;font-weight:400;margin-left:10px">2025-10-25</span></div>
+                    <div class="cliente-compacto">👤 BARREIRO LORENZO GUSTAVO</div>
+                    <div class="problema-compacto">🔧 Onu con se¤al baja</div>
+                </div>
+                <span class="estado-badge badge-pendiente">Pendiente</span>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-content" style="padding-top:25px">
+                    <div class="cliente-section">
+                        <div class="contacto" style="flex-direction:column;gap:8px">
+                            <span style="width:100%">📞 02396-1551-0645</span>
+                            <span style="width:100%">📍 BARRIO SAN ANTONIO CASA 5</span>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Onu con se¤al baja</div>
+                        <div class="problema-detalle">ONU CON SE¤AL BAJA</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.106.060</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Fibra Optica VLAN700</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Onu Huawei HG-8245H5 Wi-Fi</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$16000.0</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item"><div><div class="tecnico-label">Caja</div><div class="tecnico-value">T01 | F06 | C04 | P4</div></div></div>
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036528')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036528">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036528">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036528"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036528')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036528')">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -427,7 +767,7 @@
             </div>
         </div>
 
-    <script>
+        <script>
         const _tk = ['Z2hwX3BRTmw=','TXJRbzNldWc=','RjNUQ1JPdmE=','ZDVpT2tlM2U=','b2gwakdwWmQ='];
         const REPO_OWNER = 'marianogemelli1999';
         const REPO_NAME = 'marianogemelli1999.github-io';
