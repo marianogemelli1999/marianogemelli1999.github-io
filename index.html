@@ -11,9 +11,9 @@
         <div class="header">
             <h1>🛠️ Dashboard Técnico - Nodosoft</h1>
             <div class="header-content">
-                <div class="update-info">Última actualización: 27/10/2025 10:40:05</div>
+                <div class="update-info">Última actualización: 27/10/2025 10:41:19</div>
                 <div class="contador-pendientes">
-                    <div class="contador-numero" id="totalPendientes">10</div>
+                    <div class="contador-numero" id="totalPendientes">11</div>
                     <div class="contador-label">Reclamos Pendientes</div>
                 </div>
             </div>
@@ -694,6 +694,74 @@
                         <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036535"></textarea>
                         <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036535')">Guardar</button>
                         <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036535')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036536">
+            <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Nº 00036536 <span style="color:#94a3b8;font-weight:400;margin-left:10px">2025-10-27</span></div>
+                    <div class="cliente-compacto">👤 SIERRA CLAUDIA NELIDA</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <span class="estado-badge badge-pendiente">Pendiente</span>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-content" style="padding-top:25px">
+                    <div class="cliente-section">
+                        <div class="contacto" style="flex-direction:column;gap:8px">
+                            <span style="width:100%">📞 02395-1541-3830</span>
+                            <span style="width:100%">📍 BARRIO PLAN FEDERAL 110 V.CASA 52</span>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">CONFIGURAR ROUTER A DOMICILIO</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> Sin observaciones</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.236.162</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Camiletti</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Nanostation Loco M5</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$13000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036536')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036536">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036536">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036536"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036536')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036536')">Cancelar</button>
                     </div>
                 </div>
             </div>
