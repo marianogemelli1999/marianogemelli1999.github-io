@@ -11,9 +11,9 @@
         <div class="header">
             <h1>🛠️ Dashboard Técnico - Nodosoft</h1>
             <div class="header-content">
-                <div class="update-info">Última actualización: 29/10/2025 09:34:06</div>
+                <div class="update-info">Última actualización: 29/10/2025 10:23:07</div>
                 <div class="contador-pendientes">
-                    <div class="contador-numero" id="totalPendientes">7</div>
+                    <div class="contador-numero" id="totalPendientes">8</div>
                     <div class="contador-label">Reclamos Pendientes</div>
                 </div>
             </div>
@@ -490,6 +490,74 @@
                         <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036539"></textarea>
                         <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036539')">Guardar</button>
                         <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036539')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reclamo" data-orden="00036540">
+            <div class="reclamo-compacto" onclick="toggleReclamo(this.parentElement)">
+                <div class="reclamo-compacto-info">
+                    <div class="orden-compacto">Nº 00036540 <span style="color:#94a3b8;font-weight:400;margin-left:10px">2025-10-29</span></div>
+                    <div class="cliente-compacto">👤 RODRIGUEZ ANTONIO (PADRES)</div>
+                    <div class="problema-compacto">🔧 Otros Motivos</div>
+                </div>
+                <span class="estado-badge badge-pendiente">Pendiente</span>
+                <div class="icono-expandir">▼</div>
+            </div>
+            
+            <div class="reclamo-detalle">
+                <div class="reclamo-content" style="padding-top:25px">
+                    <div class="cliente-section">
+                        <div class="contacto" style="flex-direction:column;gap:8px">
+                            <span style="width:100%">📞 02396-1545-8893</span>
+                            <span style="width:100%">📍 BARRIO BUTAZZONI CASA 1</span>
+                        </div>
+                    </div>
+
+                    <div class="problema-section">
+                        <div class="problema-title">🔧 Otros Motivos</div>
+                        <div class="problema-detalle">SE CORTA EN TODOS LOS CELULARES .</div>
+                        <div style="margin-top:10px;color:#94a3b8;font-size:13px"><strong>Observaciones:</strong> 02396-422254</div>
+                    </div>
+
+                    <div class="tecnico-info">
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">IP Cliente</div>
+                                <div class="tecnico-value">192.168.236.078</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Conexión</div>
+                                <div class="tecnico-value">Camiletti</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Equipo</div>
+                                <div class="tecnico-value">Nanostation Loco M5</div>
+                            </div>
+                        </div>
+                        <div class="tecnico-item">
+                            <div>
+                                <div class="tecnico-label">Plan</div>
+                                <div class="tecnico-value">$13000.0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="trabajo-container"></div>
+                    <div class="botones">
+                        <button class="btn" onclick="event.stopPropagation();mostrarFormulario('00036540')">✅ Marcar como Realizado</button>
+                    </div>
+                    <div class="form-trabajo" id="form-00036540">
+                        <input type="text" placeholder="Tu nombre" id="tecnico-00036540">
+                        <textarea placeholder="Describe el trabajo realizado..." rows="3" id="descripcion-00036540"></textarea>
+                        <button class="btn" onclick="event.stopPropagation();guardarTrabajo('00036540')">Guardar</button>
+                        <button class="btn" style="background:#64748b" onclick="event.stopPropagation();ocultarFormulario('00036540')">Cancelar</button>
                     </div>
                 </div>
             </div>
